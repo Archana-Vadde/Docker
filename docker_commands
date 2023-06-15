@@ -1,0 +1,54 @@
+usermod -aG groupname(docker) username(ec2-user) adding user to docker group 
+(or) cat /etc/group
+docker info information about docker
+docker search imagename
+docker --version   #docker version 20.10
+docker pull imagename  #create image
+docker run -itd --name contname imagename #create container
+docker start/stop/pause/unpause cname 
+docker attach cid # enter into up & running contr
+docker commmit cname  #container to image
+docker ps  #  running container
+docker ps -a  # running and stopped container 
+docker images  # display docker images
+docker rmi imagename  delete image
+docker rm -f cid
+docker images -q # get all images id
+docker ps -aq # get all contid
+docker rmi -f $(docker images -q)  #delete all images at once
+docker rm -f $(docker ps -aq) #delete all containers at once
+docker exec -it contname /bin/bash or /bin/sh  #contr up & running even you hit exit
+docker login # login to docker registry
+docker push accountname/reponame:tag
+# naming for existing image
+docker tag imagename accountname/reponame:v1  
+# building the image from docker file
+docker build -t imagename .
+docker build
+ -f filename -t demoimage .
+docker run -it -p 8090:80  -h httpdserver -u archu --name contname imagename
+# debugging
+docker stats cid # cont resource utilization (resource utization), live statitics
+docker inspect cid # all contr information ,when created,status,n/w settings
+docker logs cid
+docker history imgid
+docker top cid (pid,ppid)
+docker events
+# copy file to container
+docker cp filename cname:/opt/x
+# networking commands
+docker network list
+docker network create archu
+docker network inspect archu
+docker network create --subnet 10.0.0.0/16 archu --ip-range 10.0.1.0/24
+docker run -itd --name cont1 --net archu --ip 10.0.1.5
+docker network rm archu
+# rename image name
+docker rename old imagename new imagename
+# docker volume
+docker volume ls
+docker volume create archu
+docker run -itd -v /opt:/opt/logs --name cont1 imagname
+# docker compose
+docker-compose up -d
+docker-compose down

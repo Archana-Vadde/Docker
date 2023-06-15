@@ -1,0 +1,6 @@
+FROM amazonlinux:latest
+MAINTAINER archana<archana@gmail.com>
+RUN yum install htttpd -y
+COPY index.html /var/www/html/index.html
+CMD ["/usr/sbin/httpd", "-D", "Foreground"]
+Expose 80
